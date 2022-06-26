@@ -30,7 +30,7 @@ mydb = mysql.connector.connect(
     host='localhost',
     user='nhl94',
     password='HpMZ6o6UMi',
-    database='nhl94seasonreplay'
+    database='nhl22seasonreplay'
 )
 mycursor = mydb.cursor()
 
