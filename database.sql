@@ -236,7 +236,7 @@ VALUES
 (3,'01','Arizona','Coyotes','ARZ','000000','Gila River Arena'),
 (1,'02','Boston','Bruins','BOS','000000','TD Garden'),
 (1,'03','Buffalo','Sabres','BUF','000000','KeyBank Center'),
-(4,'04','Calgary','Flames','CAL','000000','Scotiabank Saddledome'),
+(4,'04','Calgary','Flames','CGY','000000','Scotiabank Saddledome'),
 (2,'05','Carolina','Hurricanes','CAR','000000','PNC Arena'),
 (3,'06','Chicago','Blackhawks','CHI','000000','United Center'),
 (3,'07','Colorado','Avalanche','COL','000000','Ball Arena'),
@@ -262,7 +262,7 @@ VALUES
 (1,'1B','Toronto','Maple Leafs','TOR','000000','Scotiabank Arena'),
 (4,'1C','Vancouver','Canucks','VAN','000000','Rogers Arena'),
 (4,'1D','Vegas','Golden Knights','VGK','000000','T-Mobile Arena'),
-(2,'1E','Washington','Capitals','WAS','000000','Capital One Arena'),
+(2,'1E','Washington','Capitals','WSH','000000','Capital One Arena'),
 (3,'1F','Winnipeg','Jets','WPG','000000','Bell MTS Place')
 ;
 -- Populate table: Players
@@ -2429,3 +2429,46 @@ VALUES
 ('2022-04-29',32,5),
 ('2022-05-01',32,25)
 ;
+
+---------- 4. create views ----------
+
+CREATE VIEW results AS (
+    SELECT g.schedule_id,t.id AS team_id,
+        CASE WHEN r.tieflag = 0 THEN
+            CASE WHEN g.goals = r.maxgoals THEN 'W' ELSE 'L' END
+            ELSE 'T' END AS GameResult
+    FROM games g
+    JOIN teams t ON g.team_id = t.id
+    JOIN (
+        SELECT schedule_id,max(goals) as maxgoals, min(goals) as mingoals, case when max(goals) = min(goals) then 1 else 0 end as tieflag
+        FROM games
+        GROUP BY schedule_id
+	) r ON g.schedule_id = r.schedule_id
+);
+
+CREATE VIEW starpoints AS (
+    SELECT *, goalpts + assistpts + shotpts + shotbonus + savepts + svpctbonus + shutout AS starpoints,
+    	RANK() OVER(PARTITION BY schedule_id ORDER BY starpoints DESC, toi ASC) AS starrank
+    FROM
+    (
+        SELECT g.schedule_id, g.id AS game_id, t.id AS team_id, t.abbr, p.id AS player_id, p.num, p.firstname, p.lastname, p.pos,
+        	CASE WHEN p.pos <> 'G' THEN ps.goals ELSE NULL END AS goals,
+        	CASE WHEN p.pos <> 'G' THEN ps.assists ELSE NULL END AS assists,
+        	CASE WHEN p.pos <> 'G' THEN ps.sog ELSE NULL END AS shots,
+        	CASE WHEN p.pos = 'G' THEN ps.sog - ps.goals ELSE NULL END AS saves,
+        	CASE WHEN p.pos = 'G' THEN (ps.sog - ps.goals) / ps.sog ELSE NULL END AS svpct,
+        	ps.toi,
+        	CASE WHEN p.pos <> 'G' THEN ps.goals ELSE 0 END * 250 AS goalpts,
+        	CASE WHEN p.pos <> 'G' THEN ps.assists ELSE 0 END * 100 AS assistpts,
+        	CASE WHEN p.pos <> 'G' THEN ps.sog ELSE 0 END * 10 AS shotpts,
+			CASE WHEN p.pos <> 'G' AND ps.sog >= 10 THEN 100 ELSE 0 END AS shotbonus,
+        	CASE WHEN p.pos = 'G' THEN ps.sog - ps.goals ELSE 0 END * 10 AS savepts,
+        	CASE WHEN p.pos = 'G' AND (ps.sog - ps.goals) / ps.sog >= .95 THEN 200 ELSE 0 END AS svpctbonus,
+        	CASE WHEN p.pos = 'G' AND ps.goals = 0 THEN 600 ELSE 0 END AS shutout
+        FROM playerstats ps
+        JOIN players p ON ps.player_id = p.id
+        JOIN teams t ON p.team_id = t.id
+        JOIN games g ON ps.game_id = g.id
+        WHERE ps.toi > 0
+    ) sp
+);
