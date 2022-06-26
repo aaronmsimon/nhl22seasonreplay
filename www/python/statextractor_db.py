@@ -5,7 +5,7 @@ import mysql.connector
 from datetime import datetime
 
 # open save file
-filename = r'C:\Users\Aaron\AppData\Roaming\RetroArch\states\nhl94_updated.state'
+filename = r'C:\Users\Aaron\AppData\Roaming\RetroArch\states\NHL 2022 by naples39 v101.state'
 with open(filename,'rb') as inputfile:
     content = inputfile.read()
     hexFile = binascii.hexlify(content).decode('utf-8')
