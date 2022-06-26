@@ -20,7 +20,7 @@
 			<div id="header">
 				<div id="header-items">
 					<div id="leftgif" class="gif"></div>
-					<span>NHL 1993-94 Season Replay</span>
+					<span>{{ site_name }}</span>
 					<div id="rightgif" class="gif"></div>
 				</div>
 			</div>
