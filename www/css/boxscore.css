@@ -1,0 +1,107 @@
+#content {
+    font-family: "Sintony",Arial,sans-serif;
+    display: flex;
+    background-color: #ECECEC;
+    padding: 5px;
+}
+div.col {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+#col1 {
+    width: 65%;
+}
+#col2 {
+    width: 35%;
+}
+
+.section {
+    margin: 2px;
+    padding: 2px 5px;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+.subtle {
+    margin: 2px;
+    padding: 2px 5px;
+    background-color: inherit;
+    border: none;
+}
+
+#gamedate {
+    font-size: 17px;
+    line-height: 1.75;
+}
+table {
+    border-spacing: 0;
+    width: 100%;
+    text-align: center;
+}
+th {
+    height: 38px;
+    font-weight: normal;
+    font-size: 12px;
+}
+td {
+    padding: 5px 0;
+    font-weight: 500;
+    font-family: "Oswald",Arial,sans-serif;
+}
+.teamname {
+    font-weight: bold;
+    font-size: 16px;
+}
+.box {
+    display: flex;
+    align-items: center;
+}
+td.teamcol {
+    width: 100px;
+}
+
+#team-stats th {
+    padding: 10px 0;
+}
+#team-stats td {
+    font-size: 27px;
+}
+
+#scoring-summary {
+    font-size: 12px;
+}
+.goal-details td {
+    border: 1px solid black;
+}
+.goal-scorer {
+    font-size: 15px;
+    font-weight: bold;
+}
+.assists {
+    margin: 3px 0;
+}
+.goal-time {
+    width: 100px;
+}
+.running-score {
+    width: 100px;
+}
+.goal-suffix {
+    width: 25px;
+}
+
+table.border td {
+    border-bottom: 1px solid #ECECEC;
+}
+
+#threestars .player-image {
+    border-radius: 25px;
+    border: 1px solid #ECECEC;
+}
+#threestars .starplayer {
+    font-weight: bold;
+    font-size: 16px;
+}
+#threestars .info {
+    font-size: 12px;
+}
