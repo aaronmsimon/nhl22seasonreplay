@@ -172,9 +172,9 @@
         JOIN teams t ON g.team_id = t.id
         JOIN schedule s ON g.schedule_id = s.id
         WHERE s.id = $scheduleid
-        
+
         UNION
-        
+
         SELECT ps.period, CASE WHEN ps.period < 4 THEN ps.period ELSE 'OT' END AS PeriodLabel,
           SUM(CASE WHEN s.awayteam_id = t.id THEN ps.shots ELSE 0 END) AS Away,
           SUM(CASE WHEN s.hometeam_id = t.id THEN ps.shots ELSE 0 END) AS Home
@@ -184,9 +184,9 @@
         JOIN schedule s ON g.schedule_id = s.id
         WHERE s.id = $scheduleid
         GROUP BY ps.period
-        
+
         UNION
-        
+
         SELECT 5 AS period, 'Total' AS PeriodLabel,
           SUM(CASE WHEN s.awayteam_id = t.id THEN ps.shots ELSE 0 END) AS Away,
           SUM(CASE WHEN s.hometeam_id = t.id THEN ps.shots ELSE 0 END) AS Home
@@ -222,7 +222,7 @@
         's.id' => $scheduleid
       ));
       $otgoals = $this->db->get()->row();
-      
+
       return ($tieflag->row_count > 0 || $otgoals->OTGoals > 0);
     }
 
