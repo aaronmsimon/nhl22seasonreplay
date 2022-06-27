@@ -206,15 +206,20 @@ VALUES
 	(2,'Central','Cen',3),
 	(2,'Pacific','Pac',4)
 ;
--- Create table: GoalTypes
-CREATE TABLE IF NOT EXISTS goaltypes (
-	id SMALLINT UNSIGNED NOT NULL,
-	category VARCHAR(2) NULL,
-	description VARCHAR(25) NOT NULL,
-	detail VARCHAR(4) NOT NULL,
-	team VARCHAR(4) NOT NULL,
-	PRIMARY KEY (id)
-);
+-- Populate table: GoalTypes
+INSERT INTO goaltypes
+VALUES
+	(0,'sh','Short-Handed','sh2','home'),
+	(1,'sh','Short-Handed','sh','home'),
+	(2,null,'Even Strength','even','home'),
+	(3,'pp','Power Play','pp','home'),
+	(4,'pp','Power Play','pp2','home'),
+	(128,'sh','Short-Handed','sh2','away'),
+	(129,'sh','Short-Handed','sh','away'),
+	(130,null,'Even Strength','even','away'),
+	(131,'pp','Power Play','pp','away'),
+	(132,'pp','Power Play','pp2','away')
+;
 -- Populate table: Penalties
 INSERT INTO penalties
 VALUES
