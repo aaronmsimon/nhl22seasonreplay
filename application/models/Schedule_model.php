@@ -156,8 +156,8 @@
       $this->db->select('p.team_id, p.firstname, p.lastname, gp.gp / tot.totalgp as pctgp',FALSE);
       $this->db->from('schedule as s');
       $this->db->join('players as p','s.hometeam_id = p.team_id');
-      $this->db->join('games_played as gp','p.id = gp.playerid');
-      $this->db->join('(select s.id,sum(gp.gp) as totalgp from schedule s join players p on s.hometeam_id = p.team_id join games_played gp on p.id = gp.playerid group by s.id) as tot','s.id = tot.id');
+      $this->db->join('games_played as gp','p.id = gp.player_id');
+      $this->db->join('(select s.id,sum(gp.gp) as totalgp from schedule s join players p on s.hometeam_id = p.team_id join games_played gp on p.id = gp.player_id group by s.id) as tot','s.id = tot.id');
       $this->db->where(array(
         's.id' => $scheduleid,
         'p.pos' => 'G'
@@ -186,8 +186,8 @@
       $this->db->select('p.team_id, p.firstname, p.lastname, gp.gp / tot.totalgp as pctgp',FALSE);
       $this->db->from('schedule as s');
       $this->db->join('players as p','s.awayteam_id = p.team_id');
-      $this->db->join('games_played as gp','p.id = gp.playerid');
-      $this->db->join('(select s.id,sum(gp.gp) as totalgp from schedule s join players p on s.awayteam_id = p.team_id join games_played gp on p.id = gp.playerid group by s.id) as tot','s.id = tot.id');
+      $this->db->join('games_played as gp','p.id = gp.player_id');
+      $this->db->join('(select s.id,sum(gp.gp) as totalgp from schedule s join players p on s.awayteam_id = p.team_id join games_played gp on p.id = gp.player_id group by s.id) as tot','s.id = tot.id');
       $this->db->where(array(
         's.id' => $scheduleid,
         'p.pos' => 'G'
