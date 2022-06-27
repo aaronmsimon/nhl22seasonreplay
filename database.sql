@@ -237,7 +237,7 @@ VALUES
 -- Populate table: Teams
 INSERT INTO teams (division_id, hexvalue, city, name, abbr, color, arena)
 VALUES
-(4,'00','Anaheim','Ducks','ANA','000000','Honda Center'),
+(4,'00','Anaheim','Ducks','ANA','C34316','Honda Center'),
 (3,'01','Arizona','Coyotes','ARI','000000','Gila River Arena'),
 (1,'02','Boston','Bruins','BOS','000000','TD Garden'),
 (1,'03','Buffalo','Sabres','BUF','000000','KeyBank Center'),
@@ -261,12 +261,12 @@ VALUES
 (2,'15','Philadelphia','Flyers','PHI','000000','Wells Fargo Center'),
 (2,'16','Pittsburgh','Penguins','PIT','000000','PPG Paints Arena'),
 (4,'17','San Jose','Sharks','SJS','000000','SAP Center'),
-(4,'18','Seattle','Kraken','SEA','000000','Climate Pledge Arena'),
+(4,'18','Seattle','Kraken','SEA','6AACCD','Climate Pledge Arena'),
 (3,'19','St. Louis','Blues','STL','000000','Enterprise Center'),
-(1,'1A','Tampa Bay','Lightning','TBL','000000','Amalie Arena'),
+(1,'1A','Tampa Bay','Lightning','TBL','001E5D','Amalie Arena'),
 (1,'1B','Toronto','Maple Leafs','TOR','000000','Scotiabank Arena'),
 (4,'1C','Vancouver','Canucks','VAN','000000','Rogers Arena'),
-(4,'1D','Vegas','Golden Knights','VGK','000000','T-Mobile Arena'),
+(4,'1D','Vegas','Golden Knights','VGK','8D744A','T-Mobile Arena'),
 (2,'1E','Washington','Capitals','WSH','000000','Capital One Arena'),
 (3,'1F','Winnipeg','Jets','WPG','000000','Bell MTS Place')
 ;
